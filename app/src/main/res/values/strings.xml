@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Homework</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up">Register</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="email">Email</string>
+    <string name="dob">Date of birth</string>
+    <string name="phone_number">Phone number</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="country">Country</string>
+    <string-array name="gender">
+        <item>Vietnam</item>
+        <item>China</item>
+        <item>America</item>
+        <item>France</item>
+        <item>Australia</item>
+        <item>Germany</item>
+        <item>Brazil</item>
+        <item>Portugal</item>
+    </string-array>
+</resources>
