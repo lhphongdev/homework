@@ -45,18 +45,25 @@ public class LoginActivity extends AppCompatActivity {
         String username = inputUsername.getText().toString().trim();
         String password = inputPassword.getText().toString().trim();
 
-        if (username.isEmpty()) {
-            showError(inputUsername, "Username is not empty");
-        } else if (password.isEmpty()) {
-            showError(inputPassword, "Password must be at least 6 characters");
-        } else {
-            if (username.equals("admin") && password.equals("admin")) {
-                Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, HomeActivity.class));
-            } else {
-                Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
-            }
-        }
+        Intent i = getIntent();
+        String validateUsername = i.getStringExtra("username");
+        String validatePass = i.getStringExtra("password");
+
+        Toast.makeText(LoginActivity.this, validateUsername + validatePass, Toast.LENGTH_SHORT).show();
+
+
+//        if (username.isEmpty()) {
+//            showError(inputUsername, "Username is not empty");
+//        } else if (password.isEmpty()) {
+//            showError(inputPassword, "Password must be at least 6 characters");
+//        } else {
+//            if (username.equals(validateUsername) && password.equals(validatePass)) {
+//                Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(this, HomeActivity.class));
+//            } else {
+//                Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+//            }
+//        }
     }
 
     private void showError(EditText input, String s) {

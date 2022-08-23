@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+//import kotlin.internal.IntrinsicConstEvaluation;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -43,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 updateCalendar();
             }
@@ -60,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
         dateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(RegisterActivity.this,date,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(RegisterActivity.this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -69,26 +72,10 @@ public class RegisterActivity extends AppCompatActivity {
         loginChangePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
 
-
-//        agree = findViewById(R.id.registerAgree);
-//        btnRegister = findViewById(R.id.btnRegister);
-//        radio = findViewById(R.id.radioGroup);
-//        agree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean check) {
-//                if (check) {
-//                    btnRegister.setVisibility(View.VISIBLE);
-//                    radio.setVisibility(View.GONE);
-//                } else {
-//                    btnRegister.setVisibility(View.GONE);
-//                    radio.setVisibility(View.VISIBLE);
-//                }
-//            }
-//        });
 
         username = findViewById(R.id.registerUsername);
         password = findViewById(R.id.registerPassword);
@@ -97,8 +84,27 @@ public class RegisterActivity extends AppCompatActivity {
         phoneNumber = findViewById(R.id.registerPhone);
 
         btnRegister = findViewById(R.id.btnRegister);
-        btnRegister.setOnClickListener(view -> checkCredentials());
 
+        CheckBox agree = findViewById(R.id.registerAgree);
+        btnRegister = findViewById(R.id.btnRegister);
+
+//        agree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean check) {
+//
+//                if (check) {
+//                    btnRegister.setClickable(true);
+//                    btnRegister.setBackgroundColor(Color.GREEN);
+        btnRegister.setOnClickListener(view -> checkCredentials());
+//                } else {
+//                    btnRegister.setClickable(false);
+//                    btnRegister.setBackgroundColor(Color.parseColor("#BFB3C1"));
+//                    btnRegister.setOnClickListener(view -> Toast.makeText(RegisterActivity.this, "Check agree privacy", Toast.LENGTH_SHORT).show());
+//
+//
+//                }
+//            }
+//        });
     }
 
     private void checkCredentials() {
@@ -107,6 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
         String inputPassword = password.getText().toString().trim();
         String inputConfirmPassword = confirmPassword.getText().toString().trim();
         String inputPhone = phoneNumber.getText().toString().trim();
+        String inputDateOfBirth = dateOfBirth.getText().toString().trim();
 
         if (inputUsername.isEmpty() || inputUsername.length() < 7) {
             showError(username, "Username is not valid");
@@ -116,12 +123,17 @@ public class RegisterActivity extends AppCompatActivity {
             showError(password, "Password must be at least 6 characters");
         } else if (inputConfirmPassword.isEmpty() || !inputConfirmPassword.equals(inputPassword)) {
             showError(confirmPassword, "Password and confirm password do not match");
-        }else if (inputPhone.isEmpty()){
+        } else if (inputPhone.isEmpty()) {
             showError(confirmPassword, "Password and confirm password do not match");
-        }
-        else {
+        } else if (inputDateOfBirth.isEmpty()) {
+            showError(dateOfBirth, "Date of birth is empty");
+        } else {
             Toast.makeText(RegisterActivity.this, "Register Successfully", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            Intent login = new Intent(getApplicationContext(), LoginActivity.class);
+
+            login.putExtra("username", inputUsername);
+            login.putExtra("password", inputPassword);
+            startActivity(login);
         }
     }
 
