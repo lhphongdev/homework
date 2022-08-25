@@ -9,16 +9,21 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -30,6 +35,10 @@ public class RegisterActivity extends AppCompatActivity {
     Calendar calendar;
     Button btnRegister;
     TextView loginChangePage;
+    Spinner country;
+    String homeTown,gender;
+    RadioGroup radioGroup;
+    RadioButton selectedRadioButton;
 
 
     @Override
@@ -60,21 +69,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         };
 
-        dateOfBirth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new DatePickerDialog(RegisterActivity.this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        dateOfBirth.setOnClickListener(view -> new DatePickerDialog(RegisterActivity.this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show());
 
         loginChangePage = findViewById(R.id.textLogin);
-
-        loginChangePage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-            }
-        });
+        loginChangePage.setOnClickListener(view -> startActivity(new Intent(RegisterActivity.this, LoginActivity.class)));
 
 
         username = findViewById(R.id.registerUsername);
@@ -87,6 +85,37 @@ public class RegisterActivity extends AppCompatActivity {
 
         CheckBox agree = findViewById(R.id.registerAgree);
         btnRegister = findViewById(R.id.btnRegister);
+        country = findViewById(R.id.spinnerCountry);
+        ArrayList<String> countryList = new ArrayList<>();
+        countryList.add("Vietnam");
+        countryList.add("England");
+        countryList.add("Japan");
+        countryList.add("China");
+        countryList.add("Korea");
+        countryList.add("France");
+        countryList.add("Germany");
+        countryList.add("Italy");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, countryList);
+        country.setAdapter(adapter);
+        country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> country, View view, int i, long l) {
+                homeTown = country.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Toast.makeText(RegisterActivity.this, "Please select country", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        radioGroup = findViewById(R.id.radioGroup);
+        selectedRadioButton = findViewById(radioGroup.getCheckedRadioButtonId());
+        gender = selectedRadioButton.getText().toString();
+
+
+
 
 //        agree.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override
@@ -129,11 +158,13 @@ public class RegisterActivity extends AppCompatActivity {
             showError(dateOfBirth, "Date of birth is empty");
         } else {
             Toast.makeText(RegisterActivity.this, "Register Successfully", Toast.LENGTH_SHORT).show();
-            Intent login = new Intent(getApplicationContext(), LoginActivity.class);
 
-            login.putExtra("username", inputUsername);
-            login.putExtra("password", inputPassword);
-            startActivity(login);
+            String string = "Username: " + inputUsername + "\n" + "Email: " + inputEmail + "\n" + "Password: " + inputPassword + "\n" + "Gender: " + gender + "\n" + "Phone: " + inputPhone + "\n" + "Date of birth: " + inputDateOfBirth + "\n" + "Home town: " + homeTown;
+
+            Intent inputSuccess = new Intent(RegisterActivity.this, HomeActivity.class);
+
+            inputSuccess.putExtra("userInfo", string);
+            startActivity(inputSuccess);
         }
     }
 

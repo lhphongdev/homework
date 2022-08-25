@@ -286,14 +286,14 @@
             android:id="@+id/spinnerCountry"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:entries="@array/gender"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@android:drawable/btn_dropdown"
             android:outlineAmbientShadowColor="#BA9595"
             app:layout_constraintEnd_toEndOf="@+id/layoutConfirmPassword"
             app:layout_constraintStart_toStartOf="@+id/layoutConfirmPassword"
-            app:layout_constraintTop_toBottomOf="@+id/layoutConfirmPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <CheckBox
             android:id="@+id/registerAgree"
@@ -352,6 +352,19 @@
                 android:textColor="#FF0000" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:drawableLeft="@drawable/ic_baseline_flag_24"
+            android:drawablePadding="10dp"
+            android:text="@string/country"
+            android:textColor="#DFD5D5"
+            app:layout_constraintStart_toStartOf="@+id/layoutConfirmPassword"
+            app:layout_constraintTop_toBottomOf="@+id/layoutConfirmPassword" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

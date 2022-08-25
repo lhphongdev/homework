@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 public class HomeActivity extends AppCompatActivity {
+
+    TextView displayText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,9 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
+        displayText = findViewById(R.id.userInfo);
+        displayText.setText(getIntent().getStringExtra("userInfo"));
 
     }
 }
