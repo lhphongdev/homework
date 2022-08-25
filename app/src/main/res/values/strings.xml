@@ -13,6 +13,8 @@
     <string name="phone_number">Phone number</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="country">Country</string>
+    <string name="already_have_an_account">Already have an account.</string>
+    <string name="agree">Agree</string>
 
     <string-array name="gender">
         <item>Vietnam</item>

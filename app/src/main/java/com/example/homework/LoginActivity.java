@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         Button btnGoogle = findViewById(R.id.btnGoogle);
         Button btnFacebook = findViewById(R.id.btnFacebook);
 
-        btnFacebook.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"))));
+        btnFacebook.setOnClickListener(view -> startActivity(new Intent(this,StorageActivity.class)));
         btnGoogle.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"))));
 
 //        TextView forgotPassword = findViewById(R.id.forgotPassword);

@@ -300,7 +300,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Agree"
+            android:text="@string/agree"
             android:textColor="#FDF9F9"
             app:layout_constraintEnd_toEndOf="@+id/spinnerCountry"
             app:layout_constraintHorizontal_bias="0.09"
@@ -340,7 +340,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Already have an account."
+                android:text="@string/already_have_an_account"
                 android:textColor="@color/white" />
 
             <TextView
@@ -359,12 +359,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:drawableLeft="@drawable/ic_baseline_flag_24"
             android:drawablePadding="10dp"
             android:text="@string/country"
             android:textColor="#DFD5D5"
             app:layout_constraintStart_toStartOf="@+id/layoutConfirmPassword"
-            app:layout_constraintTop_toBottomOf="@+id/layoutConfirmPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutConfirmPassword"
+            app:drawableLeftCompat="@drawable/ic_baseline_flag_24" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
